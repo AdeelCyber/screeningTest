@@ -1,0 +1,30 @@
+[
+  {
+    "model": "RESTAPI.Packages",
+    "pk": 1,
+    "fields": {
+      "name": "Free",
+      "price": 0,
+      "userAllowed": 10
+    }
+  },
+  {
+    "model": "RESTAPI.Packages",
+    "pk": 2,
+    "fields": {
+      "name": "Standard",
+      "price": 10,
+      "userAllowed": 100
+
+    }
+  },
+  {
+    "model": "RESTAPI.Packages",
+    "pk": 3,
+    "fields": {
+      "name": "Pro",
+      "price": 20,
+      "userAllowed": 1000
+    }
+  }
+]
