@@ -6,12 +6,43 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from RESTAPI.Serializers.UserSerializer import AppUserSerializer, UserSerializer
+from restapi.serializers.UserSerializer import AppUserSerializer, UserSerializer
 
 
 @api_view(['POST'])
 def LoginView(request):
-    print(request.data)
+    # generate a docstring for the OPTIONS method
+
+    """
+    Login a user
+
+    Authentication Required:
+        NO
+
+    Request:
+        POST /login
+        {
+            "email": "",
+            "password": ""
+        }
+
+    Response:
+        200: User logged in successfully
+        {
+            "token": "token",
+            "profile": {
+                "id": 1,
+                "name": "John Doe",
+                "email": "".
+                "roles": "ROLE_USER",
+                "username": "user",
+                "application": 1
+            }
+        }
+        401: Unauthorized
+        400: Bad request
+
+    """
     email = request.data.get('email')
     email = email.lower()
     password = request.data.get('password')

@@ -4,12 +4,33 @@ from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
-from RESTAPI.CustomTokens.SuperAdminToken import SuperAdminAuthentication
-from RESTAPI.Serializers.ApplicationSerializer import ApplicationSerializer
-from RESTAPI.models import Application, Subscriptions
+from restapi.CustomTokens.SuperAdminToken import SuperAdminAuthentication
+from restapi.serializers.ApplicationSerializer import ApplicationSerializer
+from restapi.models import Application, Subscriptions
 
 
 class ApplicationCreate(generics.CreateAPIView):
+    # Generate Docstring for OPTIONS method
+    """
+    Create an application
+
+    Authentication Required:
+        YES (Super Admin)
+
+    Request:
+        POST /createApplication
+        {
+            "name": "Application Name",
+            "description": "Application Description",
+            "logo": File
+        }
+
+    Response:
+        201: Application created successfully
+        400: Bad request
+
+    """
+
     authentication_classes = [SuperAdminAuthentication]
     permission_classes = [IsAuthenticated]
     queryset = Application.objects.all()
@@ -21,6 +42,8 @@ class ApplicationCreate(generics.CreateAPIView):
         if serializer.is_valid():
             serializer.save()
             application = Application.objects.get(id=serializer.data['id'])
+            application.is_active = True
+            application.save()
             try:
                 newSub = Subscriptions.objects.create(application=application)
                 newSub.save()
@@ -32,6 +55,27 @@ class ApplicationCreate(generics.CreateAPIView):
 
 
 class ApplicationList(generics.ListAPIView):
+    # Generate Docstring for OPTIONS method
+    """
+    List all applications
+
+    Authentication Required:
+        YES (Super Admin)
+
+    Request:
+        GET /listApplications
+        {
+            "name": "Application Name", (optional)
+            "page": 1, (optional)
+            page_size: 10 (optional)
+        }
+
+    Response:
+        200: List of applications
+        404: Not found
+
+    """
+
     authentication_classes = [SuperAdminAuthentication]
     permission_classes = [IsAuthenticated]
     queryset = Application.objects.all()
@@ -46,6 +90,21 @@ class ApplicationList(generics.ListAPIView):
 
 
 class ApplicationDelete(generics.DestroyAPIView):
+    # Generate Docstring for OPTIONS method
+
+    """
+    Delete an application
+
+    Authentication Required:
+        YES (Super Admin)
+
+    Request:
+        DELETE /deleteApp/<id>
+
+    Response:
+        200: Application deleted successfully
+        404: Not found
+    """
     authentication_classes = [SuperAdminAuthentication]
     permission_classes = [IsAuthenticated]
     queryset = Application.objects.all()
@@ -62,6 +121,20 @@ class ApplicationDelete(generics.DestroyAPIView):
 
 
 class ApplicationDetail(generics.RetrieveAPIView):
+
+    """
+    Get an application
+
+    Authentication Required:
+        YES (Super Admin)
+
+    Request:
+        GET /applicationDetail/<id>
+
+    Response:
+        200: Application details
+        404: Not found
+    """
     authentication_classes = [SuperAdminAuthentication]
     permission_classes = [IsAuthenticated]
     queryset = Application.objects.all()
@@ -74,6 +147,26 @@ class ApplicationDetail(generics.RetrieveAPIView):
 
 
 class ApplicationUpdate(generics.UpdateAPIView):
+
+    """
+    Update an application
+
+    Authentication Required:
+        YES (Super Admin)
+
+    Request:
+        PUT /updateApplication/<id>
+        {
+            "name": "Application Name",
+            "description": "Application Description",
+            "logo": File
+        }
+        (Partial update is allowed)
+
+    Response:
+        200: Application updated successfully
+        404: Not found
+    """
     authentication_classes = [SuperAdminAuthentication]
     permission_classes = [IsAuthenticated]
     queryset = Application.objects.all()

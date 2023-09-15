@@ -6,6 +6,11 @@ from .roles import *
 
 
 class Users(AbstractUser):
+    """
+    Custom user model where email is the unique identifiers
+    for authentication instead of usernames.
+
+    """
     username = models.CharField(max_length=100, null=False, blank=False, unique=True,
                                 error_messages={'unique': 'A user with that username already exists.'})
     first_name = None
@@ -28,6 +33,10 @@ class Users(AbstractUser):
 
 
 class Packages(models.Model):
+    """
+    Packages for subscription of an application
+
+    """
     name = models.CharField(max_length=100, null=False, blank=False)
     price = models.FloatField(null=False, blank=False)
     userAllowed = models.IntegerField(null=False, blank=False)
@@ -40,6 +49,10 @@ class Packages(models.Model):
 
 
 class Application(models.Model):
+    """
+    Application model
+
+    """
     name = models.CharField(max_length=100, null=False, blank=False)
     description = models.CharField(max_length=100, null=False, blank=False)
     logo = models.ImageField(upload_to="applicationLogo", null=True, blank=True)
@@ -62,6 +75,10 @@ class Application(models.Model):
 
 
 class Subscriptions(models.Model):
+    """
+    Subscription model
+
+    """
     application = models.ForeignKey(Application, on_delete=models.CASCADE)
     package = models.ForeignKey(Packages,default=1, on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now_add=True)
@@ -72,6 +89,12 @@ class Subscriptions(models.Model):
 
 
 class ApplicationUsers(Users):
+    """
+    Application Users model
+
+    Derived from Users model to add application field
+    """
+
     application = models.ForeignKey(Application, on_delete=models.CASCADE, default=1)
 
     def __str__(self):

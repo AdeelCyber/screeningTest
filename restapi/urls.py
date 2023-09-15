@@ -1,10 +1,10 @@
 from django.urls import path
 
-from .Views.ApplicationViews import ApplicationCreate, ApplicationList, ApplicationDetail, ApplicationUpdate, \
+from .views.ApplicationViews import ApplicationCreate, ApplicationList, ApplicationDetail, ApplicationUpdate, \
     ApplicationDelete
-from .Views.AuthViews import LoginView
-from .Views.SubscriptionViews import SubscriptionDelete, SubscriptionUpdate, SubscriptionList
-from .Views.UserViews import AppUserCreate
+from .views.AuthViews import LoginView
+from .views.SubscriptionViews import SubscriptionDelete, SubscriptionUpdate, SubscriptionList
+from .views.UserViews import AppUserCreate
 
 urlpatterns = [
     path("login", LoginView),

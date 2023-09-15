@@ -6,12 +6,53 @@ from .ApplicationSerializer import ApplicationSerializer
 from ..models import *
 
 class UserSerializer(serializers.ModelSerializer):
+    # Generate Docstring for Serializer class
+    """
+    User Serializer
+
+    Model: Users
+
+    Fields:
+        id: IntegerField
+        email: EmailField
+        password: CharField
+        roles: CharField
+        Name: CharField
+        username: CharField
+        date_joined: DateTimeField
+        is_active: BooleanField
+
+    """
     class Meta:
         model = Users
         fields = ['id', 'email', 'password', 'roles', 'Name', "username", "date_joined", "is_active"]
 
 
 class AppUserSerializer(serializers.ModelSerializer):
+    """
+        User Serializer
+
+        Model: Users
+
+        Fields:
+            id: IntegerField
+            email: EmailField
+            password: CharField
+            roles: CharField
+            Name: CharField
+            username: CharField
+            date_joined: DateTimeField
+            is_active: BooleanField
+
+    usage:
+    - Login Profile DATA
+    - Create Profile DATA
+    - Update Profile DATA
+    - Delete Profile DATA
+
+
+    """
+
     roles = serializers.CharField(required=True)
     Name = serializers.CharField(required=True)
     email = serializers.EmailField(required=True, allow_null=False)

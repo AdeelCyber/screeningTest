@@ -4,6 +4,20 @@ from ..models import *
 
 
 class SubscriptionSerializer(serializers.ModelSerializer):
+    # Generate Docstring for Serializer class
+    """
+    Subscription Serializer
+
+    Model: Subscriptions
+
+    Fields:
+        id: IntegerField
+        application: Application
+        package: Packages
+        date: DateTimeField
+        is_active: BooleanField
+
+    """
     class Meta:
         model = Subscriptions
         fields = "__all__"

@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'rest_framework.authtoken',
-    "RESTAPI.apps.RestapiConfig",
+    "restapi.apps.RestapiConfig",
 
 ]
 
@@ -54,7 +54,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'screeningTest.urls'
-AUTH_USER_MODEL = "RESTAPI.Users"
+AUTH_USER_MODEL = "restapi.Users"
 
 
 REST_FRAMEWORK = {
@@ -64,7 +64,7 @@ REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         'rest_framework.authentication.TokenAuthentication',
     ),
-    "DEFAULT_PAGINATION_CLASS": "RESTAPI.other.pagination.StandardResultsSetPagination",
+    "DEFAULT_PAGINATION_CLASS": "restapi.other.pagination.StandardResultsSetPagination",
 
 }
 

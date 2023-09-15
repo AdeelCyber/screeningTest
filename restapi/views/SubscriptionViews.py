@@ -6,13 +6,31 @@ from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
-from RESTAPI.CustomTokens.SuperAdminToken import SuperAdminAuthentication
-from RESTAPI.Serializers.ApplicationSerializer import ApplicationSerializer
-from RESTAPI.Serializers.SubscriptionSerializer import SubscriptionSerializer
-from RESTAPI.models import Subscriptions, Packages
+from restapi.CustomTokens.SuperAdminToken import SuperAdminAuthentication
+from restapi.serializers.ApplicationSerializer import ApplicationSerializer
+from restapi.serializers.SubscriptionSerializer import SubscriptionSerializer
+from restapi.models import Subscriptions, Packages
 
 
 class SubscriptionDelete(generics.DestroyAPIView):
+    # Generate Docstring for OPTIONS method
+
+    """
+    Delete a subscription
+
+    Authentication Required:
+        YES (Super Admin)
+
+    Request:
+        DELETE /deleteSubscription/<subscription_id>
+
+    Response:
+        200: Subscription deleted successfully
+        400: Bad request
+        404: Subscription not found
+
+
+    """
     authentication_classes = [SuperAdminAuthentication]
     permission_classes = [IsAuthenticated]
     queryset = Subscriptions.objects.all()
@@ -29,6 +47,30 @@ class SubscriptionDelete(generics.DestroyAPIView):
 
 
 class SubscriptionUpdate(generics.UpdateAPIView):
+    # Generate Docstring for OPTIONS method
+
+    """
+    Update a subscription
+
+    Authentication Required:
+        YES (Super Admin)
+
+    Request:
+        PUT /SubscriptionUpdate/<subscription_id>
+        {
+            "subscription_id": 1,
+            "action": "activate" or "upgradeTo",
+            "package_id": 1 (required if action is upgradeTo)
+        }
+
+    Response:
+        200: Subscription updated successfully
+        400: Bad request
+        404: Subscription not found
+
+    """
+
+
     authentication_classes = [SuperAdminAuthentication]
     permission_classes = [IsAuthenticated]
     queryset = Subscriptions.objects.all()
@@ -81,6 +123,27 @@ class SubscriptionUpdate(generics.UpdateAPIView):
 
 
 class SubscriptionList(generics.ListAPIView):
+
+    """
+    List all subscriptions
+
+    Authentication Required:
+        YES (Super Admin)
+
+    Request:
+        GET /SubscriptionList
+        {
+            "applicationID": 1, (optional)
+            "page": 1, (optional)
+            page_size: 10 (optional)
+        }
+
+    Response:
+        200: List of subscriptions
+        404: Not found
+
+
+    """
     authentication_classes = [SuperAdminAuthentication]
     permission_classes = [IsAuthenticated]
     queryset = Subscriptions.objects.all()

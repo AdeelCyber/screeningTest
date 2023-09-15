@@ -4,6 +4,21 @@ from ..models import *
 
 
 class ApplicationSerializer(serializers.ModelSerializer):
+    # Generate Docstring for Serializer class
+    """
+    Application Serializer
+
+    Model: Application
+
+    Fields:
+        id: IntegerField
+        name: CharField
+        description: CharField
+        logo: ImageField
+        is_active: BooleanField
+
+
+    """
     class Meta:
         model = Application
         fields = "__all__"
@@ -12,8 +27,8 @@ class ApplicationSerializer(serializers.ModelSerializer):
             "description": {"required": True, "allow_null": False},
             "logo": {"required": True, "allow_null": False},
             "is_active": {"required": True, "allow_null": False},
-            "is_deleted": {"required": True, "allow_null": False},
         }
 
     def create(self, validated_data):
         return Application.objects.create(**validated_data)
+

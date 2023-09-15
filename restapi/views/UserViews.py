@@ -4,14 +4,36 @@ from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
-from RESTAPI.CustomTokens.UsersToken import UsersToken
-from RESTAPI.Serializers.UserSerializer import AppUserSerializer
-from RESTAPI.models import ApplicationUsers, Application
+from restapi.CustomTokens.UsersToken import UsersToken
+from restapi.serializers.UserSerializer import AppUserSerializer
+from restapi.models import ApplicationUsers, Application
 
 
 class AppUserCreate(generics.CreateAPIView):
-    # authentication_classes = [TokenAuthentication]
-    # permission_classes = [IsAuthenticated]
+    # generate a docstring for the OPTIONS method
+
+    """
+    Create a user
+
+    Authentication Required:
+        NO
+
+    Request:
+        POST /register
+        {
+            "Name": "John Doe",
+            "email": "user@test.com",
+            "roles": "USER",
+            "username": "user",
+            "password": "password",
+            "appID": 1
+        }
+
+    Response:
+        201: User created successfully
+        400: Bad request
+
+    """
     queryset = ApplicationUsers.objects.all()
     serializer_class = AppUserSerializer
 
@@ -37,6 +59,30 @@ class AppUserCreate(generics.CreateAPIView):
 
 
 class AppUserUpdate(generics.UpdateAPIView):
+    # generate a docstring for the OPTIONS method
+    """
+    Update a user
+
+    Authentication Required:
+        Yes (User Token Required)
+
+    Request:
+        PUT /update
+        {
+            "id": 1,
+            "Name": "John Doe",
+            "email": "",
+            "roles": "USER",
+        }
+
+
+
+    Response:
+        200: User updated successfully
+        400: Bad request
+
+
+    """
     authentication_classes = [UsersToken]
     permission_classes = [IsAuthenticated]
     queryset = ApplicationUsers.objects.all()

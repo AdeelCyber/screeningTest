@@ -1,6 +1,6 @@
 [
   {
-    "model": "RESTAPI.Packages",
+    "model": "restapi.Packages",
     "pk": 1,
     "fields": {
       "name": "Free",
@@ -9,7 +9,7 @@
     }
   },
   {
-    "model": "RESTAPI.Packages",
+    "model": "restapi.Packages",
     "pk": 2,
     "fields": {
       "name": "Standard",
@@ -19,7 +19,7 @@
     }
   },
   {
-    "model": "RESTAPI.Packages",
+    "model": "restapi.Packages",
     "pk": 3,
     "fields": {
       "name": "Pro",
