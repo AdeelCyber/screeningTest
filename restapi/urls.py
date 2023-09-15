@@ -1,10 +1,9 @@
 from django.urls import path
 
-from .views.ApplicationViews import ApplicationCreate, ApplicationList, ApplicationDetail, ApplicationUpdate, \
-    ApplicationDelete
-from .views.AuthViews import LoginView
-from .views.SubscriptionViews import SubscriptionDelete, SubscriptionUpdate, SubscriptionList
-from .views.UserViews import AppUserCreate
+from restapi.views.application_views import *
+from restapi.views.auth_views import LoginView
+from restapi.views.subscription_views import *
+from restapi.views.user_views import AppUserCreate
 
 urlpatterns = [
     path("login", LoginView),

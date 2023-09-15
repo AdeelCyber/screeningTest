@@ -4,9 +4,9 @@ from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
-from restapi.CustomTokens.UsersToken import UsersToken
-from restapi.serializers.UserSerializer import AppUserSerializer
+from restapi.custom_tokens.UsersToken import UsersToken
 from restapi.models import ApplicationUsers, Application
+from restapi.serializers.user_serializer import AppUserSerializer
 
 
 class AppUserCreate(generics.CreateAPIView):
@@ -44,7 +44,10 @@ class AppUserCreate(generics.CreateAPIView):
             appID = self.request.data.get('appID', None)
             if appID is None:
                 return Response({'error': 'appID is required'}, status=status.HTTP_400_BAD_REQUEST)
-            subscription = Application.getActiveSubscription(appID)
+            application = Application.objects.get(id=appID)
+            if application.is_active is False:
+                return Response({'error': 'Application is not active'}, status=status.HTTP_400_BAD_REQUEST)
+            subscription = Application.getActiveSubscription(application)
             if subscription:
                 userCounts = ApplicationUsers.objects.filter(application=appID).count()
                 if userCounts >= subscription.package.userAllowed:

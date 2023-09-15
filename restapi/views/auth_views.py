@@ -6,7 +6,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from restapi.serializers.UserSerializer import AppUserSerializer, UserSerializer
+from restapi.serializers.user_serializer import AppUserSerializer, UserSerializer
 
 
 @api_view(['POST'])
@@ -53,7 +53,6 @@ def LoginView(request):
     if user is not None:
         if user.isUserUser():
             token = Token.objects.get_or_create(user=user)
-            print(token[0].key)
             return JsonResponse({
                 'token': token[0].key,
                 "profile": AppUserSerializer(user).data,

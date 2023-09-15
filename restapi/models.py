@@ -26,6 +26,7 @@ class Users(AbstractUser):
         return self.roles == SUPER_ADMIN
 
     def isUserUser(self):
+        print(self.roles)
         return self.roles == USER
 
     def __str__(self):
@@ -62,9 +63,8 @@ class Application(models.Model):
         return self.name + " " + str(self.is_active)
 
     @staticmethod
-    def getActiveSubscription(applicationID):
+    def getActiveSubscription(application):
         try:
-            application = Application.objects.get(id=applicationID)
             subscription = Subscriptions.objects.filter(application=application, is_active=True)
             if subscription.exists():
                 return subscription[0]

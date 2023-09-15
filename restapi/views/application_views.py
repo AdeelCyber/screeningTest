@@ -4,9 +4,9 @@ from rest_framework.generics import get_object_or_404
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
-from restapi.CustomTokens.SuperAdminToken import SuperAdminAuthentication
-from restapi.serializers.ApplicationSerializer import ApplicationSerializer
+from restapi.custom_tokens.SuperAdminToken import SuperAdminAuthentication
 from restapi.models import Application, Subscriptions
+from restapi.serializers.application_serializer import ApplicationSerializer
 
 
 class ApplicationCreate(generics.CreateAPIView):
