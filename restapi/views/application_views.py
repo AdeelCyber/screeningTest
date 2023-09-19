@@ -10,7 +10,6 @@ from restapi.serializers.application_serializer import ApplicationSerializer
 
 
 class ApplicationCreate(generics.CreateAPIView):
-    # Generate Docstring for OPTIONS method
     """
     Create an application
 
@@ -55,7 +54,6 @@ class ApplicationCreate(generics.CreateAPIView):
 
 
 class ApplicationList(generics.ListAPIView):
-    # Generate Docstring for OPTIONS method
     """
     List all applications
 
@@ -90,7 +88,6 @@ class ApplicationList(generics.ListAPIView):
 
 
 class ApplicationDelete(generics.DestroyAPIView):
-    # Generate Docstring for OPTIONS method
 
     """
     Delete an application

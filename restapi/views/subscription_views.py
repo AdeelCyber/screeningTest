@@ -12,7 +12,6 @@ from restapi.serializers.subscription_serializer import SubscriptionSerializer
 
 
 class SubscriptionDelete(generics.DestroyAPIView):
-    # Generate Docstring for OPTIONS method
 
     """
     Delete a subscription
@@ -46,7 +45,6 @@ class SubscriptionDelete(generics.DestroyAPIView):
 
 
 class SubscriptionUpdate(generics.UpdateAPIView):
-    # Generate Docstring for OPTIONS method
 
     """
     Update a subscription

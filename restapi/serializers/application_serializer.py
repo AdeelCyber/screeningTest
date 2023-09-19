@@ -4,7 +4,6 @@ from ..models import *
 
 
 class ApplicationSerializer(serializers.ModelSerializer):
-    # Generate Docstring for Serializer class
     """
     Application Serializer
 

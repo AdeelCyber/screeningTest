@@ -6,7 +6,6 @@ from .application_serializer import ApplicationSerializer
 from ..models import *
 
 class UserSerializer(serializers.ModelSerializer):
-    # Generate Docstring for Serializer class
     """
     User Serializer
 

@@ -11,7 +11,6 @@ from restapi.serializers.user_serializer import AppUserSerializer, UserSerialize
 
 @api_view(['POST'])
 def LoginView(request):
-    # generate a docstring for the OPTIONS method
 
     """
     Login a user

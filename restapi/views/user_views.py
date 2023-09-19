@@ -10,7 +10,6 @@ from restapi.serializers.user_serializer import AppUserSerializer
 
 
 class AppUserCreate(generics.CreateAPIView):
-    # generate a docstring for the OPTIONS method
 
     """
     Create a user
@@ -62,7 +61,6 @@ class AppUserCreate(generics.CreateAPIView):
 
 
 class AppUserUpdate(generics.UpdateAPIView):
-    # generate a docstring for the OPTIONS method
     """
     Update a user
 
