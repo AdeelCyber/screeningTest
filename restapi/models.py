@@ -35,7 +35,14 @@ class Users(AbstractUser):
 
 class Packages(models.Model):
     """
-    Packages for subscription of an application
+    Packages for subscription of an application.
+
+    When an application is created, a default package is created for it.
+
+    Three packages are created by default through fixtures.
+    -> python manage.py loaddata packageDefault.json
+
+
 
     """
     name = models.CharField(max_length=100, null=False, blank=False)
@@ -52,6 +59,10 @@ class Packages(models.Model):
 class Application(models.Model):
     """
     Application model
+
+    Application is created by super admin.
+
+    ApplicationUsers can sign up to an application. They can only sign up to an active application.
 
     """
     name = models.CharField(max_length=100, null=False, blank=False)
@@ -77,6 +88,12 @@ class Application(models.Model):
 class Subscriptions(models.Model):
     """
     Subscription model
+
+    Subscription shows which package is subscribed to an application.
+
+    Previously subscribed packages are not deleted. They are just deactivated.
+
+    Only one package can be subscribed to an application at a time.
 
     """
     application = models.ForeignKey(Application, on_delete=models.CASCADE)
